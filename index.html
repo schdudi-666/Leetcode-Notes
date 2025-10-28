@@ -150,5 +150,12 @@ h2.open::before {
 }
 </style>
 
+<script>
+const base = "https://nbviewer.org/github/schdudi-666/Leetcode-Notes/blob/main/";
+document.querySelectorAll("a[target='_blank']").forEach(a => {
+  a.href = a.href.replace("http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/", base);
+});
+</script>
+  
 </body>
 </html>
