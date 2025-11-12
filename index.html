@@ -230,6 +230,54 @@ html { scroll-behavior: smooth; }
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/322. Coin Change.ipynb">322. Coin Change 类似问题 279. Perfect Squares</a></li>
 </ul>
 
+<h2>路径型与分割型动态规划</h2>
+<ul>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/62. Unique Paths.ipynb">62. Unique Paths 类似问题 63. Unique Paths II</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/64. Minimum Path Sum.ipynb">64. Minimum Path Sum 类似问题 120. Triangle</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/416. Partition Equal Subset Sum.ipynb">416. Partition Equal Subset Sum 类似问题 698. Partition to K Equal Sum Subsets</a></li>
+</ul>
+
+<button onclick="scrollToTop()" id="topBtn" title="返回顶部">⬆️</button>
+
+<style>
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #0078D4;
+  color: white;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+#topBtn:hover {
+  background-color: #005a9e;
+  transform: scale(1.1);
+}
+</style>
+
+<script>
+let topBtn = document.getElementById("topBtn");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
+};
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
   
 <script>
 const searchBox = document.getElementById("searchBox");
