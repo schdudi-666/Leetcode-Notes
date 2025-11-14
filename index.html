@@ -177,6 +177,7 @@ html { scroll-behavior: smooth; }
 <ul>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/200. Number of Islands.ipynb">200. Number of Islands 类似问题 695. Max Area of Island</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/127. Word Ladder.ipynb">127. Word Ladder 类似问题 433. Minimum Genetic Mutation</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/17. Letter Combinations of a Phone Number.ipynb">17. Letter Combinations of a Phone Number 类似问题 78. Subsets</a></li>
 </ul>
 
 <h2>图的拓扑排序与依赖关系</h2>
@@ -192,6 +193,7 @@ html { scroll-behavior: smooth; }
 <h2>矩阵搜索与分区查找</h2>
 <ul>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/240. Search a 2D Matrix II.ipynb">240. Search a 2D Matrix II 类似问题 74. Search a 2D Matrix</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/4. Median of Two Sorted Arrays.ipynb">4. Median of Two Sorted Arrays 类似问题 378. Kth Smallest Element in a Sorted Matrix</a></li>
 </ul>
 
 <h2>图的权值搜索与路径计算</h2>
@@ -240,6 +242,7 @@ html { scroll-behavior: smooth; }
 
 <h2>编辑与序列动态规划</h2>
 <ul>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/5. Longest Palindromic Substring.ipynb">5. Longest Palindromic Substring 类似问题 647. Palindromic Substrings</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/72. Edit Distance.ipynb">72. Edit Distance 类似问题 583. Delete Operation for Two Strings</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/312. Burst Balloons.ipynb">312. Burst Balloons 类似问题 516. Longest Palindromic Subsequence</a></li>
 </ul>
@@ -290,22 +293,31 @@ function scrollToTop() {
 const searchBox = document.getElementById("searchBox");
 
 searchBox.addEventListener("keyup", () => {
-  const val = searchBox.value.trim();
+  const val = searchBox.value.trim().toLowerCase();
+  let firstMatch = null;
+
   document.querySelectorAll("li").forEach(li => {
-    const text = li.textContent;
+    const text = li.textContent.toLowerCase();
     if (/^\d+$/.test(val)) {
       const regex = new RegExp("(?:^|\\s)" + val + "\\.", "i");
-      li.style.display = regex.test(text) ? "list-item" : "none";
+      const match = regex.test(text);
+
+      li.style.display = match ? "list-item" : "none";
+      if (match && !firstMatch) firstMatch = li;
     }
     else {
-      li.style.display = text.toLowerCase().includes(val.toLowerCase())
-        ? "list-item"
-        : "none";
+      const match = text.includes(val);
+      li.style.display = match ? "list-item" : "none";
+      if (match && !firstMatch) firstMatch = li;
     }
   });
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstMatch.style.backgroundColor = "#ffffcc";     // 高亮
+    setTimeout(() => firstMatch.style.backgroundColor = "", 1500); // 消失
+  }
 });
 </script>
-
 
 <script>
 // 给每个 h2 添加折叠功能
