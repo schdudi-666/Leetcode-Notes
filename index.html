@@ -288,13 +288,24 @@ function scrollToTop() {
   
 <script>
 const searchBox = document.getElementById("searchBox");
+
 searchBox.addEventListener("keyup", () => {
-  const val = searchBox.value.toLowerCase();
+  const val = searchBox.value.trim();
   document.querySelectorAll("li").forEach(li => {
-    li.style.display = li.textContent.toLowerCase().includes(val) ? "list-item" : "none";
+    const text = li.textContent;
+    if (/^\d+$/.test(val)) {
+      const regex = new RegExp("(?:^|\\s)" + val + "\\.", "i");
+      li.style.display = regex.test(text) ? "list-item" : "none";
+    }
+    else {
+      li.style.display = text.toLowerCase().includes(val.toLowerCase())
+        ? "list-item"
+        : "none";
+    }
   });
 });
 </script>
+
 
 <script>
 // 给每个 h2 添加折叠功能
