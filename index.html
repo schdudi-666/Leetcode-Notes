@@ -117,6 +117,7 @@ html { scroll-behavior: smooth; }
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/155. Min Stack.ipynb">155. Min Stack 类似问题 496. Next Greater Element I</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/20. Valid Parentheses.ipynb">20. Valid Parentheses 类似问题 22. Generate Parentheses</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/2. Add Two Numbers.ipynb">2. Add Two Numbers 类似问题 445. Add Two Numbers II</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/32. Longest Valid Parentheses.ipynb">32. Longest Valid Parentheses 类似问题 921. Minimum Add to Make Parentheses Valid</a></li>
 </ul>
 
 <h1 id="part4" style="color:#9933CC;">第四部分：二叉树与递归</h1>
@@ -178,6 +179,7 @@ html { scroll-behavior: smooth; }
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/200. Number of Islands.ipynb">200. Number of Islands 类似问题 695. Max Area of Island</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/127. Word Ladder.ipynb">127. Word Ladder 类似问题 433. Minimum Genetic Mutation</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/17. Letter Combinations of a Phone Number.ipynb">17. Letter Combinations of a Phone Number 类似问题 78. Subsets</a></li>
+  <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/31. Next Permutation.ipynb">31. Next Permutation 类似问题 46. Permutations</a></li>
 </ul>
 
 <h2>图的拓扑排序与依赖关系</h2>
@@ -194,6 +196,7 @@ html { scroll-behavior: smooth; }
 <ul>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/240. Search a 2D Matrix II.ipynb">240. Search a 2D Matrix II 类似问题 74. Search a 2D Matrix</a></li>
   <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/4. Median of Two Sorted Arrays.ipynb">4. Median of Two Sorted Arrays 类似问题 378. Kth Smallest Element in a Sorted Matrix</a></li>
+ <li><a target="_blank" href="http://localhost:8888/notebooks/Desktop/Leetcode算法题笔记/33. Search in Rotated Sorted Array.ipynb">33. Search in Rotated Sorted Array 类似问题 153. Find Minimum in Rotated Sorted Array</a></li>
 </ul>
 
 <h2>图的权值搜索与路径计算</h2>
@@ -291,32 +294,55 @@ function scrollToTop() {
   
 <script>
 const searchBox = document.getElementById("searchBox");
+const noResult = document.getElementById("noResult");
 
-searchBox.addEventListener("keyup", () => {
+// 按 Enter 才触发搜索
+searchBox.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    runSearch();
+  }
+});
+
+function runSearch() {
   const val = searchBox.value.trim().toLowerCase();
   let firstMatch = null;
+  let matchCount = 0;
 
   document.querySelectorAll("li").forEach(li => {
     const text = li.textContent.toLowerCase();
+
+    let match;
+
+    // 数字开头（匹配题号）
     if (/^\d+$/.test(val)) {
       const regex = new RegExp("(?:^|\\s)" + val + "\\.", "i");
-      const match = regex.test(text);
-
-      li.style.display = match ? "list-item" : "none";
-      if (match && !firstMatch) firstMatch = li;
-    }
+      match = regex.test(text);
+    } 
+    // 关键词搜索
     else {
-      const match = text.includes(val);
-      li.style.display = match ? "list-item" : "none";
-      if (match && !firstMatch) firstMatch = li;
+      match = text.includes(val);
+    }
+
+    li.style.display = match ? "list-item" : "none";
+
+    if (match) {
+      matchCount++;
+      if (!firstMatch) firstMatch = li;
     }
   });
-  if (firstMatch) {
+
+  //  显示 / 隐藏 “没有结果”
+  if (matchCount === 0) {
+    noResult.style.display = "block";
+  } else {
+    noResult.style.display = "none";
+    // 自动滚到第一个匹配项
     firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
-    firstMatch.style.backgroundColor = "#ffffcc";     // 高亮
-    setTimeout(() => firstMatch.style.backgroundColor = "", 1500); // 消失
+    firstMatch.style.backgroundColor = "#ffffcc";
+    setTimeout(() => firstMatch.style.backgroundColor = "", 1500);
   }
-});
+}
 </script>
 
 <script>
