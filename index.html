@@ -22,6 +22,21 @@ html { scroll-behavior: smooth; }
 </p>
 <hr>
 
+<!-- 题目统计显示 -->
+<p id="countDisplay" style="font-size:18px;font-weight:bold;color:#0078D4;margin:10px 0;">
+  📊 已完成：计算中...
+</p>
+
+<script>
+function updateCount() {
+    const links = document.querySelectorAll("a[href$='.ipynb']");
+    const count = links.length * 2;
+    document.getElementById("countDisplay").textContent = `📊 已完成：${count} 道题`;
+}
+
+window.onload = updateCount;
+</script>
+
 <!-- 📘 目录索引 -->
 <h2 style="color:#0078D4;">📘 目录</h2>
 <ul>
